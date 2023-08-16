@@ -2,24 +2,22 @@ from django.db import models
 
 
 class reader(models.Model):
-    id = models.IntegerField()
-    full_name = models.CharField()
+    full_name = models.CharField(max_length=100)
     age = models.IntegerField()
     number = models.IntegerField()
-    email = models.EmailField()
-    address = models.CharField()
+    email = models.EmailField(blank=True)
+    address = models.CharField(max_length=250)
     book = models.ForeignKey('book', on_delete=models.CASCADE)
 
-    def __str__(self, full_name):
+    def __str__(self):
         return self.full_name
 
 
 class book(models.Model):
-    id = models.BigIntegerField()
-    name = models.CharField()
-    author = models.CharField()
-    genre = models.CharField()
+    name = models.CharField(max_length=100)
+    author = models.CharField(max_length=250)
+    genre = models.CharField(max_length=250)
     amount = models.IntegerField()
 
-    def __str__(self, name):
+    def __str__(self):
         return self.name

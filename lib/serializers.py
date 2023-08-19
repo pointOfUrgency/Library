@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import reader
+from .models import reader, book
 from rest_framework.renderers import JSONRenderer
+from rest_framework.serializers import ModelSerializer
 
 
 class readerSr(serializers.Serializer):
@@ -25,4 +26,16 @@ class readerSr(serializers.Serializer):
         instance.book_id = validated_data.get("book_id", instance.book_id)
         instance.save()
         return instance
+
+
+class readerSrDel(serializers.ModelSerializer):
+    class Meta:
+        model = reader
+        fields = "__all__"
+
+
+class bookSrDel(serializers.ModelSerializer):
+    class Meta:
+        model = book
+        fields = "__all__"
 

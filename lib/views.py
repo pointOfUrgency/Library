@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from .serializers import readerSr
+from .serializers import readerSr, readerSrDel, bookSrDel
 from rest_framework.views import APIView
-from .models import reader
+from rest_framework.generics import DestroyAPIView, RetrieveUpdateDestroyAPIView
+from .models import reader, book
 
 
 class libraryAPI(APIView):
@@ -35,3 +36,13 @@ class libraryAPI(APIView):
         serializer.save()
 
         return Response({"post": serializer.data})
+    
+
+class LibDel(DestroyAPIView):
+    queryset = reader.objects.all()
+    serializer_class = readerSrDel
+
+
+class libraryAPIbooks(RetrieveUpdateDestroyAPIView):
+    queryset = book.objects.all()
+    serializer_class = bookSrDel

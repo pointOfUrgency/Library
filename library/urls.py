@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from lib.views import libraryAPI
+from lib.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/librarylist/', libraryAPI.as_view()),
+    path('api/v1/librarylist/<int:pk>/', libraryAPI.as_view()),
+    path('api/v1/librarydel/<int:pk>/', LibDel.as_view()),
+    path('api/v1/librarybook/<int:pk>/', libraryAPIbooks.as_view()),
 ]
